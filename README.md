@@ -14,28 +14,14 @@ System Components
 The system consists of the following components:
 1. A node.js program that reads data from the motion sensor and pushes it to Firebase DB. The data
 is a json object has three attributes (Same App for all spikes):
-1.1. Timestamp
-1.2. Motion start time
-1.3. Motion end time
+  1.1. Timestamp
+  1.2. Motion start time
+  1.3. Motion end time
 Ref: Week 3 Lab sheet
 2. Another program that (different program):
-2.1. listens to the Firebase DB
-2.2. For each new object, you have to perform two functions:
-2.2.1.Function 1: Sends email to a pre-defined address if the motion is long
-2.2.2.Function 2: Sends another email to a pre-defined address shows how many long and
-short motions have been detected. 
+  2.1. listens to the Firebase DB
+  2.2. For each new object, you have to perform two functions:
+    2.2.1.Function 1: Sends email to a pre-defined address if the motion is long
+    2.2.2.Function 2: Sends another email to a pre-defined address shows how many long and
+    short motions have been detected. 
 
-System Components
-The system consists of the following components:
-1. A node.js program that reads data from the motion sensor and pushes it to Firebase DB. The data
-is a json object has three attributes (Same App for all spikes):
-1.1. Timestamp
-1.2. Motion start time
-1.3. Motion end time
-Ref: Week 3 Lab sheet
-2. Another program that (different program):
-2.1. listens to the Firebase DB
-2.2. For each new object, you have to perform two functions:
-2.2.1.Function 1: Sends email to a pre-defined address if the motion is long
-2.2.2.Function 2: Sends another email to a pre-defined address shows how many long and
-short motions have been detected. 
