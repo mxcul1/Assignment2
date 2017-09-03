@@ -1,4 +1,4 @@
-# Assignment2
+# Assignment3
 
 In this assignment, we will be going through project inception: doing some initial investigation
 into what will be needed, and deciding on an approach that’s right for our team.
