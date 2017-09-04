@@ -19,7 +19,8 @@ var timedata = db.ref("serverData2");
 var alldata = db.ref("serverData3");
 var startingTime = db.ref("serverData2").child("startTime");
 var endingTime = db.ref("serverData2").child("endTime");
-
+var s = db.ref("serverData3").child("shortMotion");
+var l = db.ref("serverData3").child("longMotion");
 
 //allow errors to be printed to console
 alldata.on("value", function(snapshot) {
@@ -29,19 +30,21 @@ alldata.on("value", function(snapshot) {
 });
 
 timedata.on("value", function(snapshot) {
-	console.log(snapshot.val())
-	motionTime = endingTime - startingTime
+	data = snapshot.val();
+	sTime = data.startTime
+	eTime = data.endTime
+	motionTime = eTime - sTime
 	//now check to see whether value was short or long motion, using milliseconds
 	if((motionTime > 5000)) {
 		console.log("A long motion has been detected.");
-		timedata.transaction(function(longMotion){
+		l.transaction(function(longMotion){
 			return(longMotion || 0) + 1
 		});
 	}
 	else if((motionTime < 5000)&&(motionTime > 0)) {
 		console.log("A short motion has been detected.");
-			timeData.transaction(function(shortMotion){
-				return(shortMotion || 0) - 1
+			s.transaction(function(shortMotion){
+				return(shortMotion || 0) + 1
 			});
 	
 	};
