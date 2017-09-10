@@ -20,9 +20,6 @@ var l = db.ref("serverData3").child("longMotion");
 
 //allow errors to be printed to console
 alldata.on("value", function(snapshot) {
-	console.log(snapshot.val())
-	}, function(errorObject){
-	console.log("Failed" + errorObject.code)
 	data = snapshot.val()
 	longVal = data.longMotion
 	shortVal = data.shortMotion
@@ -42,6 +39,8 @@ timedata.on("value", function(snapshot) {
 		sendEmailShort();
 	};
 });
+
+
 function sendEmailLong(){
 	//had to "allow less secure apps" on google for this to occur
     var transporter = nodemailer.createTransport({
@@ -82,7 +81,7 @@ function sendEmailShort(){
       from: 'fit3140.team2424@gmail.com',
       to: 'fit3140.team2424@gmail.com',
       subject: 'Sending Email using Node.',
-      text: 'Sending email because we have detected a short motion! ' //+ shortVal
+      text: 'Sending email because we have detected a motion! ' + longVal
 	  
     };
     transporter.sendMail(mailOptions, function(error, info){
