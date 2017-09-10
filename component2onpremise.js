@@ -17,7 +17,7 @@ var startingTime = db.ref("serverData2").child("startTime");
 var endingTime = db.ref("serverData2").child("endTime");
 var s = db.ref("serverData3").child("shortMotion");
 var l = db.ref("serverData3").child("longMotion");
-
+flag = 0;
 //allow errors to be printed to console
 alldata.on("value", function(snapshot) {
 	data = snapshot.val()
@@ -29,15 +29,16 @@ timedata.on("value", function(snapshot) {
 	data = snapshot.val();
 	var count = 0;
 	//now check to see whether value was short or long motion, using milliseconds
-	if(data > 5000) {
+	if((data > 5000)&&(flag==1)) {
 		console.log("A long motion has been detected.");
 		sendEmailLong();
 		sendEmailShort();
 	}
-	else if((data < 5000)&&(data > 0)) {
+	else if((data < 5000)&&(data > 0)&&(flag==1)) {
 		console.log("A short motion has been detected.");
 		sendEmailShort();
 	};
+	flag = 1;
 });
 
 
@@ -53,8 +54,8 @@ function sendEmailLong(){
     var mailOptions = {
       from: 'fit3140.team2424@gmail.com',
       to: 'fit3140.team2424@gmail.com',
-      subject: 'Sending Email using Node.',
-      text: 'Sending email because we have detected a long motion!'
+      subject: 'Long motion detected: node',
+      text: 'Dear user,' + "\n" + "\n" + 'A long motion was detected by on our premise solution.' + "\n" + "\n" + "Regards, " + "\n" + "Management team."
     };
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
@@ -80,9 +81,8 @@ function sendEmailShort(){
     var mailOptions = {
       from: 'fit3140.team2424@gmail.com',
       to: 'fit3140.team2424@gmail.com',
-      subject: 'Sending Email using Node.',
-      text: 'Sending email because we have detected a motion! ' + longVal
-	  
+      subject: 'Motion change detected: node',
+      text: 'Dear user,' + "\n" + "\n" + 'A change in motion was detected by our on premise solution. Here are the changes: ' + "\n" + "\n" + 'Number of long motions are: ' + longVal + "\n" + "Number of short motions are: " + shortVal + "\n" + "\n" + "Regards, " + "\n" + "Management team."
     };
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
@@ -91,7 +91,7 @@ function sendEmailShort(){
         console.log('Email sent: ' + info.response);
       }
     });
-    console.log("User has been notified that a short motion was detected.")
+    console.log("User has been notified that a motion change was detected.")
 }
 
 
