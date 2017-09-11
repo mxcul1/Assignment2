@@ -25,6 +25,7 @@ alldata.on("value", function(snapshot) {
 	shortVal = data.shortMotion
 });
 
+//Listen to datachanges in timeStamp, so email isn't sent more than once
 timedata.on("value", function(snapshot) {
 	data = snapshot.val();
 	var count = 0;
@@ -43,7 +44,8 @@ timedata.on("value", function(snapshot) {
 
 
 function sendEmailLong(){
-	//had to "allow less secure apps" on google for this to occur
+//had to "allow less secure apps" on google for this to occur
+//set up email to send information from
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -51,6 +53,7 @@ function sendEmailLong(){
         pass: 'WatchedPotsNeverBoil'
       }
     });
+	//set up email to send information to
     var mailOptions = {
       from: 'fit3140.team2424@gmail.com',
       to: 'fit3140.team2424@gmail.com',
@@ -93,9 +96,3 @@ function sendEmailShort(){
     });
     console.log("User has been notified that a motion change was detected.")
 }
-
-
-
-
-
-
