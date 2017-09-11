@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const admin = require("firebase-admin");
 var serviceAccount = require("./serviceAccountKey.json");
-var http = require('http').Server(app);
 var router = express.Router();
 var startTime = 0;
 
@@ -58,6 +57,7 @@ board.on("ready", function(){
 		alldata.update({endTime})
 		console.log("Time difference is: " + (endTime-startTime));
 		alldata.update({timeStamp:endTime-startTime})
+		//Checks for long vs short motion and updated accordingly
 		if((endTime-startTime > 5000)) {
 		console.log("A long motion has been detected.");
 		lMotion.transaction(function(longMotion){
@@ -73,11 +73,3 @@ board.on("ready", function(){
 	});
 	
 });
-
-
-
-http.listen(8000, function(){
-	console.log("Live at port 8000")
-});
-
-
