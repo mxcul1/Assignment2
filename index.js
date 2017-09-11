@@ -1,6 +1,8 @@
+//Initialise required components
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
+//Set up firebase function to allow emails to be sent 
 exports.sendEmail = functions.database.ref('serverData2/timeStamp')
   .onWrite(event =>{
     const time = event.data.val()
@@ -29,6 +31,7 @@ exports.sendEmail = functions.database.ref('serverData2/timeStamp')
       console.log("An email to notify a long motion was detected, has been sent.")
     }
   })
+//Set up email when motion change found 
 exports.sendEmailMotionChange = functions.database.ref('serverData2/timeStamp')
   .onWrite(event =>{
     const time = event.data.val()
